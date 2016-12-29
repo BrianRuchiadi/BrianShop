@@ -14,3 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::match(['get','post'], '/Access/Register', 'Authentication@Registration')->name('AuthenticationRegistration');
+Route::post('/Validation/Username', 'Authentication@Username')->name('AuthenticationUsername');
+
+Route::get('checkingConnection',function(){
+    if(DB::connection()){
+        return "Connected";
+    }else{
+        return "Hello world";
+    }
+});

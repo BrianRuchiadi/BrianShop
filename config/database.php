@@ -54,11 +54,12 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'host' => 'localhost',//env('DB_HOST', 'localhost'),
+            'port' => '',//env('DB_PORT', '3306'),
+            'database' => 'testing',//env('DB_DATABASE', 'forge'),
+            'username' => 'root', //env('DB_USERNAME', 'forge'),
+            'password' => '' , //env('DB_PASSWORD', ''),
+            'unix_socket' => '/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock',
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',
