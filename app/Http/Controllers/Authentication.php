@@ -18,8 +18,17 @@ class Authentication extends Controller
             
             $data['username'] = $request->input('username');
             $data['password'] = $request->input('password');
-            $data['password2'] = $request->input('password2');
             $data['email'] = $request->input('email');
+            
+            $salt = rand(11111111, 99999999);
+            
+            $insert =  new AppUser();
+            $insert->username = $data['username'];
+            $insert->active = 1;
+            $insert->email = $data['email'];
+            $insert->password = $data['password'];
+            
+            $insert->save();
             
             return response()->json([$data][0]);
             //return redirect('/');
@@ -38,7 +47,7 @@ class Authentication extends Controller
         if($request->isMethod('post')){
             
             $data['username'] = $request->input('username');
-            $getUser = AppUser::where('username', $data['username'])->first();
+            $data['getUser'] = AppUser::where('username', $data['username'])->first();
             
             return response()->json([$data][0]);
         }
