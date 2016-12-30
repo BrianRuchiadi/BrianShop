@@ -15,8 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::match(['get','post'], '/Access/Register', 'Authentication@Registration')->name('AuthenticationRegistration');
-Route::post('/Validation/Username', 'Authentication@Username')->name('AuthenticationUsername');
+Route::get('/access/register', 'Authentication@getRegistration')->name('AuthenticationGetRegistration');
+Route::post('/access/register', 'Authentication@postRegistration')->name('AuthenticationPostRegistration');
+
+Route::post('/validation/username', 'Authentication@username')->name('AuthenticationUsername');
 
 Route::get('checkingConnection',function(){
     if(DB::connection()){
