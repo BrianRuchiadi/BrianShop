@@ -24,8 +24,8 @@ class AccessAuthentication extends FormRequest
     public function rules()
     {
         return [
-            'username' => 'bail|required|between:3,30|unique:app_users',
-            'email' => 'bail|required|email|between:5,30|unique:app_users',
+            'name' => 'bail|required|between:3,30|unique:users',
+            'email' => 'bail|required|email|between:5,30|unique:users',
             'password' => 'bail|min:4|required|confirmed',
             'password_confirmation' => 'bail|min:4|required'
         ];

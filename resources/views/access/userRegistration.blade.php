@@ -7,8 +7,7 @@
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-    
+        
         <!-- style below represents inline Css -->
         <style>
             html, body{
@@ -73,24 +72,23 @@
               var password = $( '#registerPassword' ).val();
               var password_confirmation = $( '#registerPassword2' ).val();
               
+              
               checkUser( username );
               checkEmail( email );
               checkPassword( password, password_confirmation );
-              
               registerPost( username, email, password, password_confirmation );
               
             }
 
             
             function registerPost( username, email, password, password_confirmation ) {
-
-              if ( emailValid && nameValid  && passwordValid ) {
+                console.log( username );
                 $.ajax({
                   type : 'POST',
                   url : '/access/register',
                   data : {
                     "_token" : "{{ csrf_token() }}",
-                    "username" : username,
+                    "name" : username,
                     "email" : email,
                     "password" : password,
                     "password_confirmation" : password_confirmation,
@@ -111,10 +109,7 @@
                     errorsHTML = '</li></div>';
                     $('.errors.class').html( errorsHtml );
                   }
-                }); 
-              } else {
-                console.log('something wrong');
-              }    
+                });   
             }
             
             function checkEmail( emailAddress ){
@@ -132,9 +127,11 @@
             }
             
             function checkUser( username ) {
+                
               if ( !username ) {
                 nameValid = false;
                 $( '#usernameError' ).html( 'Username cannot be empty' );
+                
               } else {
                 $.ajax({
                    async : false,
@@ -145,7 +142,8 @@
                      "username" : username,
                    },
                    datatype : 'json',
-                   success: function(data) {                                     
+                   success: function(data) {   
+                     console.log( data );
                      if ( data.getUser ) {
                        $( '#usernameError' ).html( 'User already exists' );
                          nameValid = false;
